@@ -5,7 +5,6 @@
 		register_page_handler("add", "content_redirector_page_handler");
 		
 		elgg_extend_view("css", "content_redirector/css");
-		elgg_extend_view("js/initialise_elgg", "content_redirector/js");
 		
 	}
 	
