@@ -63,10 +63,12 @@ if(is_plugin_enabled("groups")){
 	// check for membership
 	$options = array(
 			"type" => "group",
-			"limit" => false
+			"limit" => false,
+			"relationship" => "member",
+			"relationship_guid" => get_loggedin_userid()
 		);
 	
-	$groups = elgg_get_entities($options);
+	$groups = elgg_get_entities_from_relationship($options);
 	if(!empty($groups)){
 		// personal or group
 		$container_selection .= elgg_view("input/button", array("internalid" => "content-redirector-selector-container-personal", "type" => "button", "value" => elgg_echo("content_redirector:selector:container:personal"))) . " ";
