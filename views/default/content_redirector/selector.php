@@ -49,6 +49,12 @@ $supported_plugins = array(
 		"user_link" => "events/event/new",
 		"group_link" => "events/event/new/[USERNAME]",
 	),
+	"polls" => array(
+			"title" => elgg_echo("item:object:poll"),
+			"group_tool_option" => "polls_enable",
+			"user_link" => "polls/add",
+			"group_link" => "polls/add/[GUID]"
+	),
 	
 );
 
