@@ -47,7 +47,7 @@ $supported_plugins = array(
 		"title" => elgg_echo("event_manager:event:view:event"),
 		"group_tool_option" => "event_manager_enable",
 		"user_link" => "events/event/new",
-		"group_link" => "events/event/new/[USERNAME]",
+		"group_link" => "events/event/new/[GUID]",
 	),
 	"polls" => array(
 			"title" => elgg_echo("item:object:poll"),
