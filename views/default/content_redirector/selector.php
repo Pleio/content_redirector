@@ -10,7 +10,7 @@ $supported_plugins = array(
 		"group_tool_option" => "file_enable",
 		"user_link" => "file/add/[GUID]",
 		"group_link" => "file/add/[GUID]"
-		),
+	),
 	"blog" => array(
 		"title" => elgg_echo("item:object:blog"),
 		"group_tool_option" => "blog_enable",
@@ -28,15 +28,13 @@ $supported_plugins = array(
 		"group_tool_option" => "thewire_enable",
 		"user_link" => "thewire/owner/[USERNAME]",
 		"group_link" => "thewire/group/[GUID]"
-	),
-	
+	),	
 	"tidypics" => array(
 		"title" => elgg_echo("item:object:album"),
 		"group_tool_option" => "photos_enable",
 		"user_link" => "photos/new/[USERNAME]",
 		"group_link" => "photos/new/[USERNAME]"
 	),
-
 	"bookmarks" => array(
 		"title" => elgg_echo("item:object:bookmarks"),
 		"group_tool_option" => "bookmarks_enable",
@@ -50,12 +48,17 @@ $supported_plugins = array(
 		"group_link" => "events/event/new/[GUID]",
 	),
 	"polls" => array(
-			"title" => elgg_echo("item:object:poll"),
-			"group_tool_option" => "polls_enable",
-			"user_link" => "polls/add",
-			"group_link" => "polls/add/[GUID]"
+		"title" => elgg_echo("item:object:poll"),
+		"group_tool_option" => "polls_enable",
+		"user_link" => "polls/add",
+		"group_link" => "polls/add/[GUID]"
 	),
-	
+	"etherpad" => array(
+		"title" => elgg_echo("item:object:etherpad"),
+		"group_tool_option" => "etherpad_enable",
+		"user_link" => "etherpad/add/[GUID]",
+		"group_link" => "etherpad/add/[GUID]"
+	)
 );
 
 foreach($supported_plugins as $plugin_id => $plugin_details){
