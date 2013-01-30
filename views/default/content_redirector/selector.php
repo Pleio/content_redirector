@@ -83,6 +83,9 @@ if(elgg_is_active_plugin("groups")){
 		$container_selection .= elgg_view("input/button", array("id" => "content-redirector-selector-container-personal", "value" => elgg_echo("content_redirector:selector:container:personal"))) . " ";
 		$container_selection .= elgg_view("input/button", array("id" => "content-redirector-selector-container-group", "value" => elgg_echo("content_redirector:selector:container:group")));
 		$group_selection_items = array();
+		
+		$group_tools_options = elgg_get_config("group_tool_options");
+		
 		foreach($groups as $group){
 			$group_rels = array();
 			foreach($supported_plugins as $plugin_name => $plugin_details){
@@ -92,6 +95,17 @@ if(elgg_is_active_plugin("groups")){
 					$tool_option = $group->$plugin_details["group_tool_option"];
 					if($tool_option == "yes"){
 						$group_rels[] = $plugin_name;
+					} elseif($tool_option !== "no") {
+						if($group_tools_options){
+							foreach ($group_tools_options as $i => $option) {
+								if ($option->name == str_replace("_enable", "", $plugin_details["group_tool_option"])) {
+									if($option->default_on == true){
+										$group_rels[] = $plugin_name;
+									}
+									break;
+								}
+							}
+						}
 					}
 				}
 			}
