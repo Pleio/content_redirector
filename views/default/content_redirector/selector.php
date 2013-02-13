@@ -58,7 +58,14 @@ $supported_plugins = array(
 		"group_tool_option" => "etherpad_enable",
 		"user_link" => "etherpad/add/[GUID]",
 		"group_link" => "etherpad/add/[GUID]"
+	),
+	"videolist" => array(
+		"title" => elgg_echo("item:object:videolist_item"),
+		"group_tool_option" => true, // videolist doesn't add a group tool option
+		"user_link" => "videolist/add/[GUID]",
+		"group_link" => "videolist/add/[GUID]"
 	)
+		
 );
 
 foreach($supported_plugins as $plugin_id => $plugin_details){
