@@ -2,27 +2,27 @@
 //<script>
 
 $(document).ready(function(){
-	$("#content-redirector-selector input[type='button']").live("click", function(event){
+	$("#content-redirector-selector > div input[type='button']").live("click", function(event){
 		$(this).parent().find("input").removeClass("elgg-button-submit");
 		$(this).addClass("elgg-button-submit")
 	});
 
-	$("#content-redirector-selector-container-group").click(function(event){
+	$("#content-redirector-selector-container-group").live("click", function(event){
 		$("#content-redirector-group-selection").show();
 		$("#content-redirector-group-selection input").removeClass("elgg-button-submit");
 		$("#content-redirector-selector-add").hide();
 	});
 
-	$("#content-redirector-selector-container-personal").click(function(event){
+	$("#content-redirector-selector-container-personal").live("click", function(event){
 		$("#content-redirector-group-selection").hide();
 		$("#content-redirector-selector-add").show();
 	});
 
-	$("#content-redirector-group-selection input").click(function(event){
+	$("#content-redirector-group-selection input").live("click", function(event){
 		$("#content-redirector-selector-add").show();
 	});
 
-	$("#content-redirector-type-selection input").click(function(event){
+	$("#content-redirector-type-selection input").live("click", function(event){
 		$("#content-redirector-container-selection").show();
 		content_redirector_check_groups($(this).attr("id"));
 		// no container selection available
@@ -37,7 +37,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$("#content-redirector-selector-add").click(function(event){
+	$("#content-redirector-selector-add").live("click", function(event){
 		var content_type = $("#content-redirector-type-selection input.elgg-button-submit").attr("id");
 		var group_guid = $("#content-redirector-group-selection input:visible.elgg-button-submit").attr("id");
 		var group_username = $("#content-redirector-group-selection input:visible.elgg-button-submit").attr("name");
@@ -55,7 +55,7 @@ $(document).ready(function(){
 		}
 		
 		event.stopPropagation();
-	});	
+	});
 });
 
 function content_redirector_check_groups(content_type){
