@@ -4,7 +4,7 @@
 $(document).ready(function(){
 	$("#content-redirector-selector > div input[type='button']").live("click", function(event){
 		$(this).parent().find("input").removeClass("elgg-button-submit");
-		$(this).addClass("elgg-button-submit")
+		$(this).addClass("elgg-button-submit");
 	});
 
 	$("#content-redirector-selector-container-group").live("click", function(event){
