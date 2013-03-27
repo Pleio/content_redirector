@@ -23,17 +23,48 @@ $(document).ready(function(){
 	});
 
 	$("#content-redirector-type-selection input").live("click", function(event){
-		$("#content-redirector-container-selection").show();
+		var content_type = $("#content-redirector-type-selection input.elgg-button-submit").attr("id");
+		if(eval(content_type + "_details[0]") !== ""){
+			// both group and user upload available
+			$("#content-redirector-container-selection").show();
+		} else {
+			// only group upload available, no need for container selection
+			$("#content-redirector-container-selection").hide();
+			if($("#content-redirector-selector-container-group.elgg-button-submit").length === 0){
+				// no groups preselected
+				$("#content-redirector-selector-container-group").click();
+			} else {
+				// check if there was a group selected, and reselect
+				$("#content-redirector-group-selection input:visible.elgg-button-submit").click();
+			}
+		}
+		
 		content_redirector_check_groups($(this).attr("id"));
 		// no container selection available
+		
+		var show_add_button = false;
+		
 		if($("#content-redirector-container-selection").length === 0){
+			// no container options available
+			show_add_button = true;
+		} else {
+			if($("#content-redirector-selector-container-personal.elgg-button-submit").length !== 0){
+				// personal selected
+				show_add_button = true;
+			} else {
+				if($("#content-redirector-selector-container-group.elgg-button-submit").length !== 0){
+					if($("#content-redirector-group-selection input:visible.elgg-button-submit").length !== 0){
+						// group selected
+						show_add_button = true;
+					}
+				}
+			}			
+		}
+
+		if(show_add_button){
 			$("#content-redirector-selector-add").show();
 		} else {
-			if($("#content-redirector-group-selection input:visible.elgg-button-submit").length === 0){
-				$("#content-redirector-selector-add").hide();
-			} else {
-				$("#content-redirector-selector-add").show();
-			}			
+			$("#content-redirector-selector-add").hide();
 		}
 	});
 

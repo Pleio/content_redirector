@@ -4,6 +4,12 @@ $type_selection = "";
 $container_selection = "";
 $group_selection = "";
 
+$groups_enabled = false;
+
+if(elgg_is_active_plugin("groups")){
+	$groups_enabled = true;
+}
+
 $supported_plugins = array(
 	"file" => array(
 		"title" => elgg_echo("item:object:file"),
@@ -61,11 +67,16 @@ $supported_plugins = array(
 	),
 	"videolist" => array(
 		"title" => elgg_echo("item:object:videolist_item"),
-		"group_tool_option" => true, // videolist doesn't add a group tool option
+		"group_tool_option" => "videolist_enable",
 		"user_link" => "videolist/add/[GUID]",
 		"group_link" => "videolist/add/[GUID]"
-	)
-		
+	),
+	"groups" => array(
+		"title" => elgg_echo("item:object:groupforumtopic"),
+		"group_tool_option" => "forum_enable",
+		"user_link" => false,
+		"group_link" => "discussion/add/[GUID]"
+	)	
 );
 
 foreach($supported_plugins as $plugin_id => $plugin_details){
