@@ -24,23 +24,29 @@ $(document).ready(function(){
 
 	$("#content-redirector-type-selection input").live("click", function(event){
 		var content_type = $("#content-redirector-type-selection input.elgg-button-submit").attr("id");
-		if(eval(content_type + "_details[0]") !== ""){
-			// both group and user upload available
-			$("#content-redirector-container-selection").show();
-		} else {
-			// only group upload available, no need for container selection
-			$("#content-redirector-container-selection").hide();
-			if($("#content-redirector-selector-container-group.elgg-button-submit").length === 0){
-				// no groups preselected
-				$("#content-redirector-selector-container-group").click();
+		if(content_type !== ""){
+			if(eval(content_type + "_details[0]") !== ""){
+				// both group and user upload available
+				$("#content-redirector-container-selection").show();
 			} else {
-				// check if there was a group selected, and reselect
-				$("#content-redirector-group-selection input:visible.elgg-button-submit").click();
+				// only group upload available, no need for container selection
+				$("#content-redirector-container-selection").hide();
+				if($("#content-redirector-selector-container-group.elgg-button-submit").length === 0){
+					// no groups preselected
+					$("#content-redirector-selector-container-group").click();
+				} else {
+					// check if there was a group selected, and reselect
+					$("#content-redirector-group-selection input:visible.elgg-button-submit").click();
+				}
 			}
 		}
 		
 		content_redirector_check_groups($(this).attr("id"));
-		// no container selection available
+
+		// validate preselected groups
+		if($("#content-redirector-selector-container-group.elgg-button-submit").length !== 0){
+			$("#content-redirector-group-selection").show();
+		}
 		
 		var show_add_button = false;
 		
@@ -87,6 +93,8 @@ $(document).ready(function(){
 		
 		event.stopPropagation();
 	});
+
+	content_redirector_preselect();
 });
 
 function content_redirector_check_groups(content_type){
@@ -99,5 +107,25 @@ function content_redirector_check_groups(content_type){
 			$("#content-redirector-group-none").show();
 			$("#content-redirector-group-selection input").hide();
 		}	
+	}
+}
+
+function content_redirector_preselect() {
+	params = elgg.parse_url(document.location.href,"query", true);
+	if(params){
+		content_type = params["content_type"];
+		container_guid = params["container_guid"];
+		if(content_type){
+			$("#content-redirector-type-selection #" + content_type).click();
+			if(container_guid){
+				$("#content-redirector-selector-container-group:visible").click();
+				$("#content-redirector-group-selection #" + container_guid + ":visible").click();			
+			}
+		} else {
+			if(container_guid){
+				$("#content-redirector-selector-container-group").addClass("elgg-button-submit");
+				$("#content-redirector-group-selection #" + container_guid).addClass("elgg-button-submit");			
+			}
+		}		
 	}
 }
