@@ -1,5 +1,18 @@
 = Version history =
 
+1.1 (2013-04-05):
+
+- added: support for polls plugin
+- added: support for etherpad plugin
+- added: support for videolist plugin
+- added: support for forumtopics
+- added: support for default on group tool option
+- added: support for preselected content type and container_guid
+- changed: js onclick to live registration
+- fixed: invalid add link for event creation in groups
+- fixed: small js error
+- fixed: selector issue in IE7/8
+
 1.0 (2012-04-02):
 
 - changed: updated for Elgg 1.8
