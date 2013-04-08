@@ -1,6 +1,9 @@
 <?php ?>
 //<script>
 
+var content_redirector_content_type = ""; 
+var content_redirector_container_guid = ""; 
+	
 $(document).ready(function(){
 	$("#content-redirector-selector > .elgg-module input[type='button']").live("click", function(event){
 		$(this).parent().find("input").removeClass("elgg-button-submit");
@@ -111,21 +114,16 @@ function content_redirector_check_groups(content_type){
 }
 
 function content_redirector_preselect() {
-	params = elgg.parse_url(document.location.href,"query", true);
-	if(params){
-		content_type = params["content_type"];
-		container_guid = params["container_guid"];
-		if(content_type){
-			$("#content-redirector-type-selection #" + content_type).click();
-			if(container_guid){
-				$("#content-redirector-selector-container-group:visible").click();
-				$("#content-redirector-group-selection #" + container_guid + ":visible").click();			
-			}
-		} else {
-			if(container_guid){
-				$("#content-redirector-selector-container-group").addClass("elgg-button-submit");
-				$("#content-redirector-group-selection #" + container_guid).addClass("elgg-button-submit");			
-			}
-		}		
+	if(content_redirector_content_type){
+		$("#content-redirector-type-selection #" + content_redirector_content_type).click();
+		if(content_redirector_container_guid){
+			$("#content-redirector-selector-container-group:visible").click();
+			$("#content-redirector-group-selection #" + content_redirector_container_guid + ":visible").click();			
+		}
+	} else {
+		if(content_redirector_container_guid){
+			$("#content-redirector-selector-container-group").addClass("elgg-button-submit");
+			$("#content-redirector-group-selection #" + content_redirector_container_guid).addClass("elgg-button-submit");			
+		}
 	}
 }

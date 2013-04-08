@@ -164,9 +164,21 @@ if(!empty($type_selection)){
 
 <script type="text/javascript">
 	<?php 
+		if($content_type = get_input("content_type")){
+			echo "content_redirector_content_type = '" . $content_type . "';";
+		}
+	
+		if($container_guid = get_input("container_guid")){
+			echo "content_redirector_container_guid = '" . $container_guid . "';";
+		}
+	
 		foreach($supported_plugins as $plugin_name => $plugin_details){
 			echo "var " . $plugin_name . "_details = new Array('" . $plugin_details["user_link"] . "', '" . $plugin_details["group_link"] . "');
 				";	
+		}
+		
+		if(elgg_is_xhr()){
+			echo "content_redirector_preselect();";
 		}
 	?>
 </script>
