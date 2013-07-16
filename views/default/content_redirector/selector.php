@@ -144,18 +144,21 @@ if(!empty($type_selection)){
 	?>
 <div id='content-redirector-selector'>
 	<?php
+	$type_title = "<span class='elgg-icon elgg-icon-info float-alt' title='" . elgg_echo("content_redirector:selector:type:title:info") . "'></span>" . elgg_echo("content_redirector:selector:type");
 	$type_selection = "<div class='elgg-subtext'>" . elgg_echo("content_redirector:selector:type:info")  . "</div>" . $type_selection;
-	echo elgg_view_module("info", elgg_echo("content_redirector:selector:type"), $type_selection, array("id" => "content-redirector-type-selection"));
+	echo elgg_view_module("info", $type_title, $type_selection, array("id" => "content-redirector-type-selection"));
 
 	if(!empty($container_selection)){
+		$container_title = "<span class='elgg-icon elgg-icon-info float-alt' title='" . elgg_echo("content_redirector:selector:container:title:info") . "'></span>" . elgg_echo("content_redirector:selector:container");
 		$container_selection = "<div class='elgg-subtext'>" . elgg_echo("content_redirector:selector:container:info")  . "</div>" . $container_selection;
-		echo elgg_view_module("info", elgg_echo("content_redirector:selector:container"), $container_selection, array("id" => "content-redirector-container-selection", "class" => "hidden"));
+		echo elgg_view_module("info", $container_title, $container_selection, array("id" => "content-redirector-container-selection", "class" => "hidden"));
 	}
 
 	if(!empty($group_selection)){
+		$group_title = "<span class='elgg-icon elgg-icon-info float-alt' title='" . elgg_echo("content_redirector:selector:group:title:info") . "'></span>" . elgg_echo("content_redirector:selector:group");
 		$group_selection = "<div class='elgg-subtext'>" . elgg_echo("content_redirector:selector:group:info")  . "</div>" . $group_selection;
 		$group_selection .= "<div id='content-redirector-group-none'>". elgg_echo("content_redirector:selector:group:none") . "</div>";
-		echo elgg_view_module("info", elgg_echo("content_redirector:selector:group"), $group_selection, array("id" => "content-redirector-group-selection", "class" => "hidden"));
+		echo elgg_view_module("info", $group_title, $group_selection, array("id" => "content-redirector-group-selection", "class" => "hidden"));
 	}
 
 	echo elgg_view("input/button", array("id" => "content-redirector-selector-add", "value" => elgg_echo("content_redirector:selector:add"), "class" => "elgg-button-submit hidden"));
