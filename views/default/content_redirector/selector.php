@@ -34,12 +34,12 @@ $supported_plugins = array(
 		"group_tool_option" => "thewire_enable",
 		"user_link" => "thewire/owner/[USERNAME]",
 		"group_link" => "thewire/group/[GUID]"
-	),	
+	),
 	"tidypics" => array(
 		"title" => elgg_echo("item:object:album"),
 		"group_tool_option" => "photos_enable",
-		"user_link" => "photos/new/[USERNAME]",
-		"group_link" => "photos/new/[USERNAME]"
+		"user_link" => "photos/add/[GUID]",
+		"group_link" => "photos/add/[GUID]"
 	),
 	"bookmarks" => array(
 		"title" => elgg_echo("item:object:bookmarks"),
@@ -76,7 +76,7 @@ $supported_plugins = array(
 		"group_tool_option" => "forum_enable",
 		"user_link" => false,
 		"group_link" => "discussion/add/[GUID]"
-	)	
+	)
 );
 
 foreach($supported_plugins as $plugin_id => $plugin_details){
@@ -86,7 +86,7 @@ foreach($supported_plugins as $plugin_id => $plugin_details){
 }
 
 if(elgg_is_active_plugin("groups")){
-	
+
 	// check for membership
 	$options = array(
 			"type" => "group",
@@ -94,16 +94,16 @@ if(elgg_is_active_plugin("groups")){
 			"relationship" => "member",
 			"relationship_guid" => elgg_get_logged_in_user_guid()
 		);
-	
+
 	$groups = elgg_get_entities_from_relationship($options);
 	if(!empty($groups)){
 		// personal or group
 		$container_selection .= elgg_view("input/button", array("id" => "content-redirector-selector-container-personal", "value" => elgg_echo("content_redirector:selector:container:personal"))) . " ";
 		$container_selection .= elgg_view("input/button", array("id" => "content-redirector-selector-container-group", "value" => elgg_echo("content_redirector:selector:container:group")));
 		$group_selection_items = array();
-		
+
 		$group_tools_options = elgg_get_config("group_tool_options");
-		
+
 		foreach($groups as $group){
 			$group_rels = array();
 			foreach($supported_plugins as $plugin_name => $plugin_details){
@@ -130,7 +130,7 @@ if(elgg_is_active_plugin("groups")){
 			if(!empty($group_rels)){
 				$group_rels = implode($group_rels, " ");
 			}
-			
+
 			$key = strtolower($group->name) . "-" . $group->getGUID();
 			$button = elgg_view("input/button", array("id" => $group->guid, "rel" => $group_rels, "name" => $group->username, "value" => $group->name));
 			$group_selection_items[$key] = $button;
@@ -143,46 +143,46 @@ if(elgg_is_active_plugin("groups")){
 if(!empty($type_selection)){
 	?>
 <div id='content-redirector-selector'>
-	<?php 
+	<?php
 	$type_selection = "<div class='elgg-subtext'>" . elgg_echo("content_redirector:selector:type:info")  . "</div>" . $type_selection;
 	echo elgg_view_module("info", elgg_echo("content_redirector:selector:type"), $type_selection, array("id" => "content-redirector-type-selection"));
-	
+
 	if(!empty($container_selection)){
 		$container_selection = "<div class='elgg-subtext'>" . elgg_echo("content_redirector:selector:container:info")  . "</div>" . $container_selection;
 		echo elgg_view_module("info", elgg_echo("content_redirector:selector:container"), $container_selection, array("id" => "content-redirector-container-selection", "class" => "hidden"));
 	}
-	
+
 	if(!empty($group_selection)){
 		$group_selection = "<div class='elgg-subtext'>" . elgg_echo("content_redirector:selector:group:info")  . "</div>" . $group_selection;
 		$group_selection .= "<div id='content-redirector-group-none'>". elgg_echo("content_redirector:selector:group:none") . "</div>";
 		echo elgg_view_module("info", elgg_echo("content_redirector:selector:group"), $group_selection, array("id" => "content-redirector-group-selection", "class" => "hidden"));
 	}
-	
+
 	echo elgg_view("input/button", array("id" => "content-redirector-selector-add", "value" => elgg_echo("content_redirector:selector:add"), "class" => "elgg-button-submit hidden"));
 	?>
 </div>
 
 <script type="text/javascript">
-	<?php 
+	<?php
 		if($content_type = get_input("content_type")){
 			echo "content_redirector_content_type = '" . $content_type . "';";
 		}
-	
+
 		if($container_guid = get_input("container_guid")){
 			echo "content_redirector_container_guid = '" . $container_guid . "';";
 		}
-	
+
 		foreach($supported_plugins as $plugin_name => $plugin_details){
 			echo "var " . $plugin_name . "_details = new Array('" . $plugin_details["user_link"] . "', '" . $plugin_details["group_link"] . "');
-				";	
+				";
 		}
-		
+
 		if(elgg_is_xhr()){
 			echo "content_redirector_preselect();";
 		}
 	?>
 </script>
-	<?php 
+	<?php
 
 } else {
 	echo elgg_echo("no supported content types available");
