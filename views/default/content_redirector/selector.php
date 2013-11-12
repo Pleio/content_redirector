@@ -76,6 +76,12 @@ $supported_plugins = array(
 		"group_tool_option" => "forum_enable",
 		"user_link" => false,
 		"group_link" => "discussion/add/[GUID]"
+	),
+	"tasks" => array(
+		"title" => elgg_echo("item:object:task_top"),
+		"group_tool_option" => "tasks_enable",
+		"user_link" => "tasks/add/[GUID]",
+		"group_link" => "tasks/add/[GUID]"
 	)
 );
 
